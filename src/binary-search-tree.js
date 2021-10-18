@@ -1,13 +1,17 @@
-const { NotImplementedError } = require('../extensions/index.js');
+const {
+  NotImplementedError
+} = require('../extensions/index.js');
 
-const { Node } = require('../extensions/list-tree.js');
+const {
+  Node
+} = require('../extensions/list-tree.js');
 
 /**
-* Implement simple binary search tree according to task description
-* using Node from extensions
-*/
+ * Implement simple binary search tree according to task description
+ * using Node from extensions
+ */
 module.exports = class BinarySearchTree {
-  constructor(){
+  constructor() {
     this.root1 = null;
   }
 
@@ -15,22 +19,61 @@ module.exports = class BinarySearchTree {
     return this.root1;
   }
 
-  add(/* data */) {
+  add(data) {
+
+    function addNode(currentNode, newNode) {
+      if (currentNode.data > newNode.data) {
+        if (!currentNode.left) {
+          currentNode.left = newNode;
+        } else {
+          addNode(currentNode.left, newNode);
+        }
+      } else {
+        if (!currentNode.right) {
+          currentNode.right = newNode;
+        } else {
+          addNode(currentNode.right, newNode);
+        }
+      }
+    }
+
+    let newNode = new Node(data);
+    if (this.root1) {
+      let currentNode = this.root1;
+      addNode(currentNode, newNode);
+    } else {
+      this.root1 = newNode
+    }
+  }
+
+  has(data) {
+    function findNode(currentNode, data) {
+      if (currentNode.data == data) {
+        return true;
+      } else if (currentNode.data > data) {
+        if (currentNode.left) {
+          return findNode(currentNode.left, data);
+        }
+      } else {
+        if (currentNode.right) {
+          return findNode(currentNode.right, data);
+        }
+      }
+    }
+
+    if (this.root1) {
+      return addNode(currentNode, data);
+    } else {
+      return false;
+    }
+  }
+
+  find( /* data */ ) {
     throw new NotImplementedError('Not implemented');
     // remove line with error and write your code here
   }
 
-  has(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
-  }
-
-  find(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
-  }
-
-  remove(/* data */) {
+  remove( /* data */ ) {
     throw new NotImplementedError('Not implemented');
     // remove line with error and write your code here
   }
