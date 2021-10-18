@@ -1,4 +1,4 @@
-module.exports.ListNode = function (x) {
+module.exports.ListNode = function (x, next = null) {
   this.value = x;
-  this.next = null;
+  this.next = next;
 }
